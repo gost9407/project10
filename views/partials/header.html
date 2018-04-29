@@ -13,6 +13,9 @@
       <ul class="nav navbar-nav">
         <li class="{% if  title == 'Home' %}active{% endif %}"><a href="/">Home</a></li>
       </ul>
+      <ul class="nav navbar-nav">
+        <li class="{% if  title == 'Comments Page' %}active{% endif %}"><a href="/comments">comments</a></li>
+      </ul>
     <ul class="nav navbar-nav navbar-right">
     {% if user %}
       <li class="dropdown">
