@@ -19,6 +19,7 @@ dotenv.load();
 // Import application Controllers
 var home = require('./controllers/home');
 var user = require('./controllers/user');
+var comment = require('./controllers/comment');
 
 
 // Passport Local strategies
@@ -27,7 +28,7 @@ require('./config/passport');
 var app = express();
 
 // database configuration
-//mongoose.connect(process.env.MONGODB);
+// mongoose.connect(process.env.MONGODB);
 mongoose.connect('mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || process.env.MONGODB) + '/nb6');
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
@@ -67,6 +68,9 @@ app.post('/signup', user.signupPost);
 app.get('/login', user.loginGet);
 app.post('/login', user.loginPost);
 app.get('/logout', user.logout);
+
+app.get('/comments', user.ensureAuthenticated, comment.list);
+app.post('/comments', user.ensureAuthenticated, comment.create);
 
 // production error handler
 if (app.get('env') === 'production') {
