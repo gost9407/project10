@@ -6,7 +6,8 @@ var Comments = require('../models/comments');
 // List Comments
 exports.list = function(req, res) {
 	// List all comments and sort by Date
-    Comments.find({user : res.locals.user}).sort('-created').populate('user').exec(function(error, comments) {
+    // Comments.find({user : res.locals.user}).sort('-created').populate('user').exec(function(error, comments) {
+      Comments.find().sort('-created').populate('user').exec(function(error, comments) {
         if (error) {
             return res.send(400, {
                 message: error
